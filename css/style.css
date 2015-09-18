@@ -1,3 +1,44 @@
+@import url(https://fonts.googleapis.com/css?family=Antic+Slab|Oxygen:400,700);
+
+body {
+	padding-top: 50px;
+	font-family: Oxygen, serif;
+	font-weight: 400;
+	font-size: 1.8em;
+	position: relative;
+}
+
+h1,h2,h3,h4,h5,h6 {
+	font-family: "Antic Slab", serif;
+	margin: 0;
+}
+
 img {
 	max-width: 200px;
+}
+
+.carousel img {
+	width: 100%;
+}
+
+.navbar {
+	border-radius: 0;
+	border: 0;
+}
+
+footer {
+	background-color: #ECECEC;
+}
+
+footer p {
+	text-align: center;
+}
+
+.page {
+	padding: 50px 0;
+}
+
+.page h2 {
+	text-align: center;
+	margin: 30px;
 }

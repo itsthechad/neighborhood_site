@@ -4,6 +4,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Windwood North | Dunwoody, GA </title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 		<link rel="stylesheet" href="css/style.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
@@ -11,72 +12,122 @@
 	<body>
 		
 		<header>
-			<nav>
-				<a href="#intro">Windwood North <span class="subhead">Dunwoody, GA</span></a>
-				<ul>
-					<li><a href="#intro">Home</a></li>
-					<li><a href="#about">About</a></li>
-					<li><a href="#park">Park</a></li>
-					<li><a href="#nearby">Nearby</a></li>
-					<li><a href="#forsale">For Sale</a></li>
-					<li><a href="#residents">Residents</a></li>
-				</ul>
+			<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+				<div class="container">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse" aria-expanded="false">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="#intro">Windwood North <span class="subhead">Dunwoody, GA</span></a>
+					</div><!--navbar-header-->
+					<div class="collapse navbar-collapse" id="collapse">
+						<ul class="nav navbar-nav navbar-right">
+							<li class="active"><a href="#featured">Home</a></li>
+							<li><a href="#about">About</a></li>
+							<li><a href="#park">Park</a></li>
+							<li><a href="#nearby">Nearby</a></li>
+							<li><a href="#forsale">For Sale</a></li>
+							<li><a href="#residents">Residents</a></li>
+						</ul>
+					</div><!--collapse navbar-collapse-->
+ 				</div><!--container -->
 			</nav>
 			
-			<div class="carousel">
-				<img src="images/carousel-sign.jpg" alt="Windwood North entrance sign">
-				<img src="images/carousel-tree.jpg" alt="Neigborhood view">
-				<img src="images/carousel-tennis.jpg" alt="Tennis courts">
-				<img src="images/carousel-playground.jpg" alt="Playground">
-				<img src="images/carousel-woods.jpg" alt="Neighborhood woods">
-				<img src="images/carousel-park-sign.jpg" alt="Windwood Hollow Park">
-			</div> <!-- carousel div -->
+			<div class="carousel slide" data-ride="carousel" id="featured">
+				<div class="carousel-inner">
+					<div class="item active"><img src="images/carousel-sign.jpg" alt="Windwood North entrance sign"></div>
+					<div class="item"><img src="images/carousel-tree.jpg" alt="Neigborhood view"></div>
+					<div class="item"><img src="images/carousel-tennis.jpg" alt="Tennis courts"></div>
+					<div class="item"><img src="images/carousel-playground.jpg" alt="Playground"></div>
+					<div class="item"><img src="images/carousel-woods.jpg" alt="Neighborhood woods"></div>
+					<div class="item"><img src="images/carousel-park-sign.jpg" alt="Windwood Hollow Park"></div>
+ 				</div><!--carousel-inner -->
+				
+				<a class="left carousel-control" href="#featured" role="button" data-slide="prev">
+					<span class="glyphicon glyphicon-chevron-left"></span>
+				</a>
+				<a class="right carousel-control" href="#featured" role="button" data-slide="next">
+					<span class="glyphicon glyphicon-chevron-right"></span>
+				</a>
+			</div> <!-- featured carousel -->
 			
 		</header>
 		
 		<div class="main">
 			
 			<section class="page" id="about">
-				<h2>About Windwood North</h2>
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-				</p>
+				<div class="content container">
+					<h2>About Windwood North</h2>
+					<div class="row">
+						<p class="col-sm-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+						<p class="col-sm-7">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+					</div><!-- row -->
+				</div> <!-- content container -->
 			</section> <!-- about page -->	
 			
 			<section class="page" id="park">
-				<h2>Windwood Hollow Park</h2>
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-				</p>
+				<div class="content container">
+					<h2>Windwood Hollow Park</h2>
+					<div class="row">
+						<p class="col-sm-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+						<div class="col-sm-8">
+							<img src="images/carousel-park-sign.jpg" alt="Windwood Hollow Park">
+						</div><!-- col -->
+					</div> <!--row-->
+ 				</div> <!--content container -->
 			</section> <!-- about page -->	
 			
 			<section class="page" id="nearby">
-				<h2>Nearby Points of Interest</h2>
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-				</p>
+				<div class="content container">
+					<div class="row">
+						<h2>Nearby Points of Interest</h2>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+					</div><!-- row -->
+				</div><!-- content container -->
 			</section> <!-- about page -->	
 			
 			<section class="page" id="forsale">
-				<h2>Homes For Sale &amp; Rent</h2>
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-				</p>
+				<div class="content container">
+					<div class="row">
+						<div class="col-sm-6">
+							<img src="images/carousel-woods.jpg" alt="Neighborhood woods">
+						</div>
+						<div class="col-sm-4">
+							<h2>Homes For Sale &amp; Rent</h2>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+						</div><!-- col -->
+					</div><!-- row -->
+				</div><!-- content container -->
 			</section> <!-- about page -->	
 			
 			<section class="page" id="residents">
-				<h2>Residents Only</h2>
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-				</p>
+				<div class="content container">
+					<div class="row">
+						<h2>Residents Only</h2>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+					</div><!-- row -->
+				</div><!-- content container -->
 			</section> <!-- about page -->	
 			
 		</div> <!-- main div -->
 		
 		<footer>
-			<div>Site created and maintained by Windwood North resident, Chad Carpenter. <a href="#">Click here to contact Chad</a>.</div>
+			<div class="content container-fluid">
+				<div class="row">
+					<div class="col-sm-12">
+						<p>Site created and maintained by Windwood North resident, <a href="http://thechad.com">Chad Carpenter</a>.</p>
+					</div><!--col-->
+				</div><!--row-->
+			</div><!--content container-->
 		</footer>
+			
+
 		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 		<script src="js/scripts.js"></script>
 		
 	</body>
