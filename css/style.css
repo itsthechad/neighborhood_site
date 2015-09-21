@@ -12,13 +12,6 @@ h1,h2,h3,h4,h5,h6 {
 	margin: 0;
 }
 
-img {
-	max-width: 200px;
-}
-
-.carousel img {
-	width: 100%;
-}
 
 
 
@@ -79,6 +72,15 @@ header .navbar-brand span.subhead {
 	display: block;
 	font-family: "Antic Slab", serif;
 	font-size: .6em;
+}
+
+#headerimage {
+	background-image: url('../images/carousel-sign.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: 70% center;
+	width: 100%;
+	height: 100%;
 }
 
 
@@ -180,6 +182,27 @@ header .inbody .navbar-brand span.subhead {
 	width: 100%;
 	height: 100%;
 }
+
+.carousel-inner {
+	margin-bottom: 30px;
+}
+
+.carousel-indicators {
+	bottom: -40px;
+}
+
+.carousel-indicators li {
+	border-color: #000;
+}
+
+.carousel-indicators .active {
+	background-color: #000;
+}
+
+.carousel-caption {
+	display: none;
+}
+
 
 /** Page **/
 

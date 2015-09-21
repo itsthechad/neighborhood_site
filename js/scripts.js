@@ -5,20 +5,11 @@ $(function() {
 	var topoffset = 50; // offset for menu height
 	var slideqty = $('#featured .item').length; // how many carousel slides?
 	var wheight = $(window).height(); // get the height of the window
-	var randSlide = Math.floor( Math.random()*slideqty ); // get a random slide
-	
-	// Setup slideshow to be random
-	$('#featured .item').eq(randSlide).addClass('active');
+
 	
 	// Set fullhieight items to window height
 	$('.fullheight').css('height', wheight); 
 	
-	// Remplace IMG inside carousels with background image
-	$('#featured .item img').each( function() {
-		var imgSrc = $(this).attr('src');
-		$(this).parent().css( {'background-image': 'url(' + imgSrc + ')'} );
-		$(this).remove();
-	});
 	
 	// Adjust height of fullheight elements on window resize
 	$(window).resize( function() {
@@ -35,7 +26,7 @@ $(function() {
 	// Add or remove nav class based on where page is currently scrolled to
 	var navinbody = function() {	
 		var currentSection = $(document).find('li.active a').attr('href');
-		if( currentSection !== '#featured' ) {
+		if( currentSection !== '#headerimage' ) {
 			$('header nav').addClass('inbody');
 		} else {
 			$('header nav').removeClass('inbody');
@@ -68,7 +59,7 @@ $(function() {
 	// automatically generate carousel indicators
 	for (var i=0; i < slideqty; i++) {
 		var insertText = '<li data-target="#featured" data-slide-to="' + i + '"';
-		if (i === randSlide) {
+		if (i === 0) {
 			insertText += 'class="active" ';
 		}
 		insertText += '></li>';
@@ -78,7 +69,23 @@ $(function() {
 	
 	// Setup carousel
 	$('.carousel').carousel({
-	  pause: false
+	  interval: false
+	});
+	
+	// Move captions content to captions bucket
+	function moveCaptions() {
+		var currentCaption = $('.carousel-inner .item.active .carousel-caption').html();
+		if (currentCaption){
+			$('#caption-bucket').html(currentCaption);
+			
+		} else { // there is no caption for the active slide
+			$('#caption-bucket').html('');
+		} //if
+	}
+	moveCaptions();
+	// Now do it automatically whenever the slide changes
+	$('.carousel').on('slid.bs.carousel', function() {
+		moveCaptions();		
 	});
 	
 });
