@@ -215,10 +215,6 @@ header .inbody .navbar-brand span.subhead {
 	margin: 30px;
 }
 
-.page img {
-	max-width: 100%;
-}
-
 /** Page: About **/
 #about {
 	background-color: #E4D29D;
@@ -226,24 +222,26 @@ header .inbody .navbar-brand span.subhead {
 	border-top: 20px solid rgba(238, 200, 86, .5);
 }
 
-/** Page: Park **/
-#park  {
-
-}
 
 /** Page: Nearby **/
 #nearby {
-	
-}
-
-/** Page: For Sale **/
-#forsale  {
+	background-color: #E4D29D;
+	background-image: linear-gradient(to bottom, #8ADDF0, #54F3B5);
 
 }
 
-/** Page: Residents **/
-#residents {
-	
+.map-container {
+	height: 450px;
+	margin-bottom: 30px;
+}
+
+#map {
+	width: 100%;
+	height: 100%;
+}
+
+.location {
+	cursor: pointer;
 }
 
 
