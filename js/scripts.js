@@ -126,8 +126,9 @@ $(function() {
 	
 	// Setup map markers, HTML locations, and their interactivity
 	// For each map location...
-	for( var j = 0; j < mapLocations.length; j++ ) {
+	for( var j=0; j < mapLocations.length; j++ ) {
 		
+		// Get the current one-letter label for the marker
 		var currentLabel = labels[labelIndex++ % labels.length];
 		
 		// Create a map marker
@@ -135,44 +136,52 @@ $(function() {
 			position: mapLocations[j].position,
 			map: map,
 			title: mapLocations[j].name,
-			label: currentLabel
+			label: currentLabel,
+			index: j // Adding this data so we can later match each marker with its HTML counterpart
 		});	
 		marker.setAnimation(null);
 		markers.push(marker);
 		
+		// Add a listener for the marker
+		marker.addListener('click', markerClicked);
+		
 		// And create an html element
-		var htmlLocation = $('<div data-marker-id=' + j + ' class="col-sm-4 location"><h4><span class="location-label">' + currentLabel + ".</span> " + mapLocations[j].name + '</h4><p>' + mapLocations[j].description + '</p></div>');
-		$('#locations').append(htmlLocation);
+		var htmlLocation = $('<div data-marker-id=' + j + ' class="location"><h4><span class="location-label">' + currentLabel + ".</span> " + mapLocations[j].name + '</h4></div>');
+		$('#locations-list').append(htmlLocation);
 		
 	}
 	
-	// Listen for html location hover
-	$('#locations .location').hover( function() {
+	// Listen for html location click
+	$('#locations-list .location').click( function() {
+		
+		// Set all locations to not active
+		$('#locations-list .location').removeClass('active');
+		// Set the clicked location to active
+		$(this).addClass('active');
+		
 		// What location is being hovered?
 		var hoveredLocation = this.dataset.markerId;
-		//console.log(hoveredLocation);
+		
+		// Set the map marker to bounce
 		toggleBounce( markers[hoveredLocation] );
+		// Turn off the bounce after a short while
+		setTimeout( function() {
+			toggleBounce(markers[hoveredLocation]);
+		} , 600);
+		
+		// Display the location detail info
+		var htmlLocationDetail = $('<h3>' + mapLocations[hoveredLocation].name + '</h3><p>' + mapLocations[hoveredLocation].description + '</p>');
+		$('#locations-detail').html(htmlLocationDetail);
 	});
 	
-	// Listen for map marker hover
+	
+
 	
 	
 });
 
 
 // Google Map
-
-/* function initMap() {
-	map = new google.maps.Map(document.getElementById('map'), {
-		center: {
-			lat: 33.943345,
-			lng: -84.280186
-		},
-		zoom: 15
-	});
-} */
-
-
 
 function initMap() {
   var customMapType = new google.maps.StyledMapType([
@@ -213,6 +222,31 @@ function initMap() {
 }
 
 
+// A map marker has been clicked
+function markerClicked() {
+	
+	// Set all locations to not active
+	$('#locations-list .location').removeClass('active');
+	// Set clicked location to active
+	$(".location[data-marker-id=" + this.index + "]").addClass('active');
+	
+	// What location is being hovered?
+	var hoveredLocation = this.index;
+
+	// Set the map marker to bounce
+	toggleBounce( markers[hoveredLocation] );
+	// Turn off the bounce after a short while
+	setTimeout( function() {
+		toggleBounce(markers[hoveredLocation]);
+	} , 600);
+
+	// Display the location detail info
+	var htmlLocationDetail = $('<h3>' + mapLocations[hoveredLocation].name + '</h3><p>' + mapLocations[hoveredLocation].description + '</p>');
+	$('#locations-detail').html(htmlLocationDetail);
+}
+
+
+// Toggle map marker animation
 function toggleBounce(hoveredMarker) {
   if (hoveredMarker.getAnimation() !== null) {
     hoveredMarker.setAnimation(null);
