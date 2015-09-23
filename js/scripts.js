@@ -8,19 +8,20 @@
 	var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 	var labelIndex = 0;
 	var markers = [];
+	var infowindows = [];
 	// Map locations
 	var mapLocations = [
 		{
 			"name": "Windwood Hollow Park",
-			"description": "This is the description for location 1",
+			"description": "<p>Windwood Hollow Park is a Dunwoody public park, though we tend to think of it as our own neighborhood park since it's nestled in at the entrance of the neighborhood.</p><p>Though small, the park offers two tennis courts, a pavillion, a nature trail, adult gym equipment, and an impressive, brand new playground area.</p>",
 			"position": { "lat": 33.942253, "lng": -84.278242}
 		}, {
 			"name": "Peeler Road Linear Park",
-			"description": "This is the description for location 2",
+			"description": "<p>This is the description for location 2</p>",
 			"position": { "lat": 33.940143, "lng": -84.278394}
 		}, {
 			"name": "Winters Chapel Animal Hospital",
-			"description": "This is the description for location 3",
+			"description": "<p>This is the description for location 3</p>",
 			"position": { "lat": 33.940707, "lng": -84.272021}
 		}
 	];
@@ -34,11 +35,27 @@ $(function() {
 /***** Basic setup ******/
 	
 	// Set fullheight items to window height
-	$('.fullheight').css('height', wheight); 
-	// Adjust height of fullheight elements on window resize
+	$('.fullheight').css('height', wheight);
+	// Set map height on mobile
+	var mapHeightDefault = $('.map-container').css('height');
+	if ( $(window).width() < 768 ) {
+		var mapHeight = $(window).height()*0.7;
+		$('.map-container').css('height', mapHeight+'px' );
+	}
+	// Adjust certain heights on window resize
 	$(window).resize( function() {
+		// Adjust fullheight elements
 		wheight = $(window).height(); // get the height of the window	
 		$('.fullheight').css('height', wheight); // set fullhieight items to window height
+		
+		//Adjust map height
+		if ( $(window).width() < 768 ) {
+			// Set map height to 70% of window height
+			var mapHeight = $(window).height()*0.7;
+			$('.map-container').css('height', mapHeight+'px' );
+		} else { // Set it to the default height
+			$('.map-container').css('height', mapHeightDefault );
+		}
 	});
 	
 	
@@ -124,7 +141,7 @@ $(function() {
 	
 	initMap();
 	
-	// Setup map markers, HTML locations, and their interactivity
+	// Setup map markers, info windows, HTML locations, and their interactivity
 	// For each map location...
 	for( var j=0; j < mapLocations.length; j++ ) {
 		
@@ -145,38 +162,20 @@ $(function() {
 		// Add a listener for the marker
 		marker.addListener('click', markerClicked);
 		
-		// And create an html element
-		var htmlLocation = $('<div data-marker-id=' + j + ' class="location"><h4><span class="location-label">' + currentLabel + ".</span> " + mapLocations[j].name + '</h4></div>');
+		// Add an info window
+		var infowindow = new google.maps.InfoWindow({
+    		content: '<h4>' + mapLocations[j].name + '</h4>' + mapLocations[j].description
+  		});
+		infowindows.push(infowindow);
+		
+		// Create an html element
+		var htmlLocation = $('<li data-marker-id=' + j + ' class="location"><h4><span class="location-label">' + currentLabel + ".</span> " + mapLocations[j].name + '</h4></li>');
 		$('#locations-list').append(htmlLocation);
 		
 	}
 	
 	// Listen for html location click
-	$('#locations-list .location').click( function() {
-		
-		// Set all locations to not active
-		$('#locations-list .location').removeClass('active');
-		// Set the clicked location to active
-		$(this).addClass('active');
-		
-		// What location is being hovered?
-		var hoveredLocation = this.dataset.markerId;
-		
-		// Set the map marker to bounce
-		toggleBounce( markers[hoveredLocation] );
-		// Turn off the bounce after a short while
-		setTimeout( function() {
-			toggleBounce(markers[hoveredLocation]);
-		} , 600);
-		
-		// Display the location detail info
-		var htmlLocationDetail = $('<h3>' + mapLocations[hoveredLocation].name + '</h3><p>' + mapLocations[hoveredLocation].description + '</p>');
-		$('#locations-detail').html(htmlLocationDetail);
-	});
-	
-	
-
-	
+	$('#locations-list .location').click(locationClicked);
 	
 });
 
@@ -209,8 +208,8 @@ function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     zoom: 15,
     center: {
-		lat: 33.943345,
-		lng: -84.280186
+		lat: 33.941649,
+		lng: -84.279135
 	},  // Windwood North
     mapTypeControlOptions: {
       mapTypeIds: [google.maps.MapTypeId.ROADMAP, customMapTypeId]
@@ -221,17 +220,15 @@ function initMap() {
   map.setMapTypeId(customMapTypeId);
 }
 
-
-// A map marker has been clicked
-function markerClicked() {
-	
+// A (html) location has been clicked
+function locationClicked() {
 	// Set all locations to not active
 	$('#locations-list .location').removeClass('active');
-	// Set clicked location to active
-	$(".location[data-marker-id=" + this.index + "]").addClass('active');
-	
+	// Set the clicked location to active
+	$(this).addClass('active');
+
 	// What location is being hovered?
-	var hoveredLocation = this.index;
+	var hoveredLocation = this.dataset.markerId;
 
 	// Set the map marker to bounce
 	toggleBounce( markers[hoveredLocation] );
@@ -241,9 +238,58 @@ function markerClicked() {
 	} , 600);
 
 	// Display the location detail info
-	var htmlLocationDetail = $('<h3>' + mapLocations[hoveredLocation].name + '</h3><p>' + mapLocations[hoveredLocation].description + '</p>');
-	$('#locations-detail').html(htmlLocationDetail);
+	// Construct the detail html from the location info array
+	var htmlLocationDetail = $('<h3>' + mapLocations[hoveredLocation].name + '</h3>' + mapLocations[hoveredLocation].description);
+	// Fade out the current html, swap it out, then fade back in
+	$('#locations-detail').fadeOut(400, function() {
+		$('#locations-detail').html(htmlLocationDetail);
+		$('#locations-detail').fadeIn(400);
+	});
 }
+
+// A map marker has been clicked
+function markerClicked() {
+	
+	// What location is being hovered?
+	var hoveredLocation = this.index;
+	
+	// Close all infowindows
+	for (var i=0; i<mapLocations.length; i++) {
+		infowindows[i].close();
+	}
+	
+	// If we're on mobile, we'll display the map section differently
+	if ( $(window).width() < 768 ){
+		
+		// Open just the appropriate infowindow
+		infowindows[hoveredLocation].open(map, markers[hoveredLocation]);
+		
+	} else { // The screen is big enough to show the locations list and details sections
+		
+		 // Set all locations to not active
+		$('#locations-list .location').removeClass('active');
+		 // Set just the clicked location to active
+		$(".location[data-marker-id=" + hoveredLocation + "]").addClass('active');
+
+		 // Set the map marker to bounce
+		toggleBounce(markers[hoveredLocation]);
+		 // Turn off the bounce after a short while
+		setTimeout(function() {
+			toggleBounce(markers[hoveredLocation]);
+		}, 600);
+
+		 // Display the location detail info
+		 // Construct the detail html from the location info array
+		var htmlLocationDetail = $('<h3>' + mapLocations[hoveredLocation].name + '</h3>' + mapLocations[hoveredLocation].description);
+		 // Fade out the current html, swap it out, then fade back in
+		$('#locations-detail').fadeOut(400, function() {
+			$('#locations-detail').html(htmlLocationDetail);
+			$('#locations-detail').fadeIn(400);
+		});
+		
+	} // if else
+
+} // markerClicked()
 
 
 // Toggle map marker animation

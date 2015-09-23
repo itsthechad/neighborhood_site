@@ -9,6 +9,7 @@ body {
 
 h1,h2,h3,h4,h5,h6 {
 	font-family: "Antic Slab", serif;
+	font-weight: 400;
 	margin: 0;
 }
 
@@ -231,20 +232,42 @@ header .inbody .navbar-brand span.subhead {
 }
 
 .map-container {
-	height: 450px;
-	margin-bottom: 30px;
+	height: 300px;
+/* 	margin-bottom: 30px; */
 }
 
 #map {
 	width: 100%;
 	height: 100%;
-	border-radius: 15px;
+	border-radius: 15px 15px 0 0;
+}
+
+#map h4 {
+	margin-bottom: 10px;
+}
+
+#locations-container {
+	border-radius: 0 0 15px 15px;
+    padding: 40px 0;
+    background-color: white;
+}
+
+@media (max-width: 768px) {
+	
+	/* 	.map-container { height: 600px } */
+	
+	#map {
+		border-radius: 0;
+	}
+	
+	#locations-container {
+		display: none;
+	}
+	
 }
 
 #locations-list {
-	border-radius: 7px;
-    padding: 20px 20px 15px 22px;
-    background-color: white;
+	list-style: none;
 }
 
 .location {
@@ -256,14 +279,13 @@ header .inbody .navbar-brand span.subhead {
 	color: #F7534B;
 	font-weight: 700;
 }
-.location.active .location-label {
-	font-size: 20px;
+
+#locations-detail h3 {
+	color: #F7534B;
 }
 
-#locations-detail {
-	border-radius: 7px;
-    padding: 15px 20px;
-    background-color: white;
+#locations-detail p {
+	font-size: .8em;
 }
 
 
