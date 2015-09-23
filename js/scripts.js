@@ -3,10 +3,12 @@
 	var topoffset = 50; // offset for menu height
 	var slideqty = $('#featured .item').length; // how many carousel slides?
 	var wheight = $(window).height(); // get the height of the window
+	var mobileSize = 768; // window width
 	// Google map variables
 	var map;
 	var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 	var labelIndex = 0;
+	var mapCenter = { "lat": 33.941649, "lng": -84.279135 }; //Windwood North coords
 	var markers = [];
 	var infowindows = [];
 	// Map locations
@@ -26,6 +28,7 @@
 		}
 	];
 
+
 // On document ready
 $(function() {
 	
@@ -38,24 +41,27 @@ $(function() {
 	$('.fullheight').css('height', wheight);
 	// Set map height on mobile
 	var mapHeightDefault = $('.map-container').css('height');
-	if ( $(window).width() < 768 ) {
+	if ( $(window).width() < mobileSize ) {
 		var mapHeight = $(window).height()*0.7;
 		$('.map-container').css('height', mapHeight+'px' );
 	}
-	// Adjust certain heights on window resize
+	// Adjustments based on window resize
 	$(window).resize( function() {
 		// Adjust fullheight elements
 		wheight = $(window).height(); // get the height of the window	
 		$('.fullheight').css('height', wheight); // set fullhieight items to window height
 		
 		//Adjust map height
-		if ( $(window).width() < 768 ) {
+		if ( $(window).width() < mobileSize ) {
 			// Set map height to 70% of window height
 			var mapHeight = $(window).height()*0.7;
 			$('.map-container').css('height', mapHeight+'px' );
 		} else { // Set it to the default height
 			$('.map-container').css('height', mapHeightDefault );
 		}
+		
+		closeAllInfoWindows();
+		map.panTo(mapCenter);
 	});
 	
 	
@@ -176,11 +182,12 @@ $(function() {
 	
 	// Listen for html location click
 	$('#locations-list .location').click(locationClicked);
+
 	
-});
+}); // document ready
 
 
-// Google Map
+//************* Google Map ****************
 
 function initMap() {
   var customMapType = new google.maps.StyledMapType([
@@ -207,10 +214,8 @@ function initMap() {
 
   map = new google.maps.Map(document.getElementById('map'), {
     zoom: 15,
-    center: {
-		lat: 33.941649,
-		lng: -84.279135
-	},  // Windwood North
+    center: mapCenter,
+	disableDefaultUI: true,
     mapTypeControlOptions: {
       mapTypeIds: [google.maps.MapTypeId.ROADMAP, customMapTypeId]
     }
@@ -220,73 +225,36 @@ function initMap() {
   map.setMapTypeId(customMapTypeId);
 }
 
+
 // A (html) location has been clicked
 function locationClicked() {
-	// Set all locations to not active
-	$('#locations-list .location').removeClass('active');
-	// Set the clicked location to active
-	$(this).addClass('active');
+	
+	// What location was clicked?
+	var clickedLocation = this.dataset.markerId;
+	// Change the active location
+	setActiveLocation(clickedLocation);	
+} // locationClicked()
 
-	// What location is being hovered?
-	var hoveredLocation = this.dataset.markerId;
-
-	// Set the map marker to bounce
-	toggleBounce( markers[hoveredLocation] );
-	// Turn off the bounce after a short while
-	setTimeout( function() {
-		toggleBounce(markers[hoveredLocation]);
-	} , 600);
-
-	// Display the location detail info
-	// Construct the detail html from the location info array
-	var htmlLocationDetail = $('<h3>' + mapLocations[hoveredLocation].name + '</h3>' + mapLocations[hoveredLocation].description);
-	// Fade out the current html, swap it out, then fade back in
-	$('#locations-detail').fadeOut(400, function() {
-		$('#locations-detail').html(htmlLocationDetail);
-		$('#locations-detail').fadeIn(400);
-	});
-}
 
 // A map marker has been clicked
 function markerClicked() {
+
+	// What location was clicked?
+	var clickedLocation = this.index;
+
+	closeAllInfoWindows();
 	
-	// What location is being hovered?
-	var hoveredLocation = this.index;
-	
-	// Close all infowindows
-	for (var i=0; i<mapLocations.length; i++) {
-		infowindows[i].close();
-	}
-	
-	// If we're on mobile, we'll display the map section differently
-	if ( $(window).width() < 768 ){
+	// If we're on mobile, we'll display location info via info windows rather than the
+	// HTML locations list and details elements
+	if ( $(window).width() < mobileSize ){
 		
-		// Open just the appropriate infowindow
-		infowindows[hoveredLocation].open(map, markers[hoveredLocation]);
+		// Center the map on the clicked location
+		centerMapOnLocation(clickedLocation);
+		// Open the appropriate infowindow
+		infowindows[clickedLocation].open(map, markers[clickedLocation]);
 		
 	} else { // The screen is big enough to show the locations list and details sections
-		
-		 // Set all locations to not active
-		$('#locations-list .location').removeClass('active');
-		 // Set just the clicked location to active
-		$(".location[data-marker-id=" + hoveredLocation + "]").addClass('active');
-
-		 // Set the map marker to bounce
-		toggleBounce(markers[hoveredLocation]);
-		 // Turn off the bounce after a short while
-		setTimeout(function() {
-			toggleBounce(markers[hoveredLocation]);
-		}, 600);
-
-		 // Display the location detail info
-		 // Construct the detail html from the location info array
-		var htmlLocationDetail = $('<h3>' + mapLocations[hoveredLocation].name + '</h3>' + mapLocations[hoveredLocation].description);
-		 // Fade out the current html, swap it out, then fade back in
-		$('#locations-detail').fadeOut(400, function() {
-			$('#locations-detail').html(htmlLocationDetail);
-			$('#locations-detail').fadeIn(400);
-		});
-		
+		setActiveLocation(clickedLocation);		
 	} // if else
 
 } // markerClicked()
@@ -299,4 +267,47 @@ function toggleBounce(hoveredMarker) {
   } else {
     hoveredMarker.setAnimation(google.maps.Animation.BOUNCE);
   }
+} // toggleBounce()
+
+
+// Close all infowindows
+function closeAllInfoWindows() {
+	for (var i=0; i<mapLocations.length; i++) {
+		infowindows[i].close();
+	}
+} // closeAllInfoWindows()
+
+
+// Change the active location to the passed in location
+function setActiveLocation(clickedLocation) {
+	
+	// Set all locations to not active
+	$('#locations-list .location').removeClass('active');
+	// Set just the clicked location to active
+	$(".location[data-marker-id=" + clickedLocation + "]").addClass('active');
+
+	centerMapOnLocation(clickedLocation);
+	
+	// Set the map marker to bounce
+	toggleBounce(markers[clickedLocation]);
+	// Turn off the bounce after a short while
+	setTimeout(function() {
+		toggleBounce(markers[clickedLocation]);
+	}, 600);
+
+	// Display the location detail info
+	// Construct the detail html from the location info array
+	var htmlLocationDetail = $('<h3>' + mapLocations[clickedLocation].name + '</h3>' + mapLocations[clickedLocation].description);
+	// Fade out the current html, swap it out, then fade back in
+	$('#locations-detail').fadeOut(400, function() {
+		$('#locations-detail').html(htmlLocationDetail);
+		$('#locations-detail').fadeIn(400);
+	});
+	
+} // setActiveLocation()
+
+// Center map and set zoom on given location
+function centerMapOnLocation(locationIndex) {
+	map.panTo( mapLocations[locationIndex].position );
+	map.setZoom(16);
 }
