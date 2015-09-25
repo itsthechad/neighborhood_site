@@ -159,8 +159,9 @@ $(function() {
 			position: mapLocations[j].position,
 			map: map,
 			title: mapLocations[j].name,
-			label: currentLabel,
-			index: j // Adding this data so we can later match each marker with its HTML counterpart
+			
+			index: j, // Adding this data so we can later match each marker with its HTML counterpart
+			icon: "http://maps.google.com/mapfiles/marker"+currentLabel+".png"
 		});	
 		marker.setAnimation(null);
 		markers.push(marker);
