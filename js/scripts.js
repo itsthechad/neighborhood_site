@@ -176,7 +176,7 @@ $(function() {
 		infowindows.push(infowindow);
 		
 		// Create an html element
-		var htmlLocation = $('<li data-marker-id=' + j + ' class="location"><h4><span class="location-label">' + currentLabel + ".</span> " + mapLocations[j].name + '</h4></li>');
+		var htmlLocation = $('<li data-marker-id=' + j + ' class="location"><h4>' + mapLocations[j].name + '</h4></li>');
 		$('#locations-list').append(htmlLocation);
 		
 	}

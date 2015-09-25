@@ -28,7 +28,8 @@ header .navbar-default {
 	border: none;
 }
 
-header .navbar-default .navbar-nav a {
+header .navbar-default .navbar-nav a,
+header .navbar-default .navbar-nav a:focus {
 	color: white;
 	text-shadow: 0 0 6px #000;
 	padding: 5px 8px;
@@ -38,7 +39,8 @@ header .navbar-default .navbar-nav a:hover {
 	color: #A9CAAE;
 }
 
-header .navbar-default .navbar-nav .active a {
+header .navbar-default .navbar-nav .active a,
+header .navbar-default .navbar-nav .active a:focus {
 	font-weight: 700;
 	color: #A9CAAE;
 	background: transparent;
@@ -59,6 +61,7 @@ header .navbar-brand {
 	background-repeat: no-repeat;
 	background-position: 38px 0;
 	height: auto;
+	margin-top: -10px;
 }
 
 header .navbar-brand h1 {
@@ -111,8 +114,10 @@ video {
     margin: auto;
     min-height:100%;
     min-width:50%;
+	opacity: .9;
 }
 
+/* Don't show video on mobile */
 @media screen and (max-width: 768px){
 	video {
 		display:none;
@@ -136,7 +141,7 @@ header .navbar-default .navbar-toggle .icon-bar {
 	background-color: white;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
 	header .navbar-collapse {
 		background-color: rgba(30,90,46, .6);
 	}
@@ -234,10 +239,12 @@ header .inbody .navbar-brand span.subhead {
 
 .carousel-indicators li {
 	border-color: #000;
+	margin-left: 3px;
 }
 
 .carousel-indicators .active {
 	background-color: #000;
+	margin-left: 3px;
 }
 
 .carousel-caption {
@@ -254,6 +261,10 @@ header .inbody .navbar-brand span.subhead {
 .page h2 {
 	text-align: center;
 	margin: 30px;
+}
+
+.btn {
+	margin: 20px;
 }
 
 /** Page: About **/
@@ -279,7 +290,7 @@ header .inbody .navbar-brand span.subhead {
 
 .map-container {
 	height: 300px;
-/* 	margin-bottom: 30px; */
+	margin-top: 15px;
 }
 
 #map {
@@ -295,13 +306,12 @@ header .inbody .navbar-brand span.subhead {
 #locations-container {
 	border-radius: 0 0 15px 15px;
     padding: 40px 0;
-    background-color: white;
+    background-color: #FFFFF3;
 }
 
-@media (max-width: 768px) {
-	
-	/* 	.map-container { height: 600px } */
-	
+/* Mobile view for map */
+@media screen and (max-width: 768px) {
+		
 	#map {
 		border-radius: 0;
 	}
@@ -313,7 +323,7 @@ header .inbody .navbar-brand span.subhead {
 }
 
 #locations-list {
-	list-style: none;
+	list-style: upper-alpha;
 }
 
 .location {
@@ -321,7 +331,7 @@ header .inbody .navbar-brand span.subhead {
 	margin-bottom: 10px;
 }
 
-.location.active h4 {
+.location.active {
 	color: #F7534B;
 	font-weight: 700;
 }
@@ -387,4 +397,67 @@ footer a:hover {
 
 footer p {
 	text-align: center;
+}
+
+
+
+/** Media Queries **/
+
+@media (max-width:992px) and (min-width: 768px) {
+	.navbar .container {
+    	width: 100%;
+	}
+	
+	header .inbody .navbar-brand {
+		margin-left: -5px !important;
+	}
+}
+
+@media (max-width:827px) {
+	header .navbar-brand h1 {
+		font-size: 1.1em;
+	}
+	
+	header .navbar-brand span.subhead {
+    	font-size: .8em;
+	}
+	
+}
+
+@media (max-width: 992px) {
+	
+	#forsale img, #residents img {
+		width: 400px;
+		border-radius: 7px;
+		margin-left: auto;
+		margin-right: auto;
+		display: block;
+	}
+	
+	#residents .jumbotron h2 {
+    	text-align: center;
+    	margin: 30px;
+	}
+	
+}
+
+@media (max-width: 768px) {
+	
+	#forsale img, #residents img {
+		width: 250px;
+		border-radius: 7px;
+		margin-left: auto;
+		margin-right: auto;
+		display: block;
+	}
+	
+	#residents {
+		padding: 0;
+	}
+	
+	#residents .jumbotron {
+		border-radius: 0;
+		margin-bottom: 0;
+	}
+	
 }
