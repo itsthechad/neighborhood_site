@@ -112,7 +112,7 @@ $(function() {
 	
 	// Setup carousel
 	$('.carousel').carousel({
-	  interval: false
+	  interval: 4000
 	});
 	
 	// automatically generate carousel indicators
