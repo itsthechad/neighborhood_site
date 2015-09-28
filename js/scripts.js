@@ -8,23 +8,91 @@
 	var map;
 	var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 	var labelIndex = 0;
-	var mapCenter = { "lat": 33.941649, "lng": -84.279135 }; //Windwood North coords
+	var mapCenter = { "lat": 33.942649, "lng": -84.278135 }; //Windwood North coords
 	var markers = [];
 	var infowindows = [];
 	// Map locations
 	var mapLocations = [
 		{
 			"name": "Windwood Hollow Park",
-			"description": "<p>Windwood Hollow Park is a Dunwoody public park, though we tend to think of it as our own neighborhood park since it's nestled in at the entrance of the neighborhood.</p><p>Though small, the park offers two tennis courts, a pavillion, a nature trail, adult gym equipment, and an impressive, brand new playground area.</p>",
+			"description": "<p>Windwood Hollow Park is a Dunwoody public park, though we tend to think of it as our own neighborhood park since it's nestled in at the entrance of the neighborhood.</p><p>The park offers two tennis courts, a pavillion, a nature trail, adult gym equipment, and an impressive, brand new playground area.</p>",
 			"position": { "lat": 33.942253, "lng": -84.278242}
 		}, {
 			"name": "Peeler Road Linear Park",
-			"description": "<p>This is the description for location 2</p>",
+			"description": "<p>A beautiful, tree-lined walking path along the serene DeKalb County Water Works.</p>",
 			"position": { "lat": 33.940143, "lng": -84.278394}
 		}, {
+			"name": "Brookrun Park",
+			"description": "<p>A huge park with playgrounds, a dog park, fields, community gardens, and much more.</p><p>Brookrun is the location of many fun events throughout the year, including Food Truck Thursdays, Lemonade Days, and Howl-O-Weenie.</p>",
+			"position": { "lat": 33.93522447, "lng": -84.29584265}
+		}, {
 			"name": "Winters Chapel Animal Hospital",
-			"description": "<p>This is the description for location 3</p>",
+			"description": "<p>Great people and a convenient location for your pets' medical needs.</p>",
 			"position": { "lat": 33.940707, "lng": -84.272021}
+		}, {
+			"name": "Walmart Neighborhood Market",
+			"description": "<p>This is not Walmart, the super-sized shopping center. Neighborhood Market is a nice and convenient grocery store, just down the street.</p>",
+			"position": { "lat": 33.94196255, "lng": -84.26985741}
+		}, {
+			"name": "Perimeter Mall",
+			"description": "<p>One of Atlanta's premier shopping malls is only 10 minutes away. Around the mall are more shops, restaurants, and businesses.</p>",
+			"position": { "lat": 33.92382993, "lng": -84.34094667}
+		}, {
+			"name": "Dunwoody Village",
+			"description": "<p>Great restaurants and shops. Dunwoody Village is undergoing big changes with hopes of becoming the next Decatur Square.</p>",
+			"position": { "lat": 33.9481839, "lng": -84.33408022}
+		}, {
+			"name": "Marcus Jewish Community Center",
+			"description": "<p>Offering swimming, tennis, gym, preschool, summer camps, sporting events, and more, the MJCC is open to all.</p>",
+			"position": { "lat": 33.946101, "lng": -84.30449}
+		}, {
+			"name": "Georgetown Shopping Center",
+			"description": "<p>Groceries, restaurants, and shopping.</p>",
+			"position": { "lat": 33.92234319, "lng": -84.3153584}
+		}, {
+			"name": "Williamsburg Shopping Center",
+			"description": "<p>Groceries, restaurants, and shopping.</p>",
+			"position": { "lat": 33.95823144, "lng": -84.30352449}
+		}, {
+			"name": "Market Place Shopping Center",
+			"description": "<p>Groceries, restaurants, and shopping.</p>",
+			"position": { "lat": 33.95153025, "lng": -84.23232794}
+		}, {
+			"name": "Spalding Corners Shopping Center",
+			"description": "<p>Groceries, restaurants, and shopping.</p>",
+			"position": { "lat": 33.96849135, "lng": -84.26028728}
+		}, {
+			"name": "The Forum on Peachtree Parkway",
+			"description": "<p>Shop and eat in style at this classy outdoor shopping complex.</p>",
+			"position": { "lat": 33.981723, "lng": -84.216352}
+		}, {
+			"name": "Kingsely Elementary School",
+			"description": "<p>Our local elementary school.</p>",
+			"position": { "lat": 33.948146, "lng": -84.297169}
+		}, {
+			"name": "Peachtree Middle School",
+			"description": "<p>Our local middle school.</p>",
+			"position": { "lat": 33.931143, "lng": -84.29621}
+		}, {
+			"name": "Dunwoody High School",
+			"description": "<p>Our local high school. Go Wildcats!</p>",
+			"position": { "lat": 33.94549605, "lng": -84.31549788}
+		}, {
+			"name": "Dunwoody Library",
+			"description": "<p>Part of the DeKalb County Public Library System</p>",
+			"position": { "lat": 33.944299, "lng": -84.331709}
+		}, {
+			"name": "Third Rail Studios at Assembly",
+			"description": "<p>Recently announced and now under development, this future destination will feature a Hollywood-style movie studio, shops, and restaurants.</p>",
+			"position": { "lat": 33.9047941, "lng": -84.28318262}
+		}, {
+			"name": "I-285",
+			"description": "<p>From Windwood North, you can be on I-285 in just 5 minutes. From there, all of Atlanta is yours.</p>",
+			"position": { "lat": 33.91295029, "lng": -84.28629398}
+		}, {
+			"name": "Atlanta",
+			"description": "<p>As one of America's most happening cities, there's never a lack of great fun and tasty food in Atlanta. Just a 20-25 minute drive away, all of Atlanta is easily accessible.</p><p>Optionally, drop the car off at a local MARTA station, and ride into the city.</p>",
+			"position": { "lat": 33.76380757, "lng": -84.39302444}
 		}
 	];
 
@@ -92,7 +160,7 @@ $(function() {
 /***** Smooth scrolling ******/
 	
 	//Use smooth scrolling when clicking on navigation
-	$('a[href*=#]:not([href=#])').click(function() {
+	$('nav a[href*=#]:not([href=#])').click(function() {
 		if (location.pathname.replace(/^\//, '') ===
 			this.pathname.replace(/^\//, '') &&
 			location.hostname === this.hostname) {
@@ -177,7 +245,7 @@ $(function() {
 		
 		// Create an html element
 		var htmlLocation = $('<li data-marker-id=' + j + ' class="location"><h4>' + mapLocations[j].name + '</h4></li>');
-		$('#locations-list').append(htmlLocation);
+		$('#locations-list ul').append(htmlLocation);
 		
 	}
 	
@@ -214,7 +282,7 @@ function initMap() {
   var customMapTypeId = 'custom_style';
 
   map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 15,
+    zoom: 14,
     center: mapCenter,
 	disableDefaultUI: true,
     mapTypeControlOptions: {
@@ -224,6 +292,79 @@ function initMap() {
 
   map.mapTypes.set(customMapTypeId, customMapType);
   map.setMapTypeId(customMapTypeId);
+	
+  initHoodPoly();
+}
+
+
+// Create the polygon representing the neighborhood
+function initHoodPoly() {
+	
+	// Define the LatLng coordinates for the polygon's path.
+	var polyCoords = [{
+		lat: 33.9401735,
+		lng: -84.27852631
+	}, {
+		lat: 33.9402447,
+		lng: -84.27752852
+	}, {
+		lat: 33.94291492,
+		lng: -84.27579045
+	}, {
+		lat: 33.94359136,
+		lng: -84.27518964
+	}, {
+		lat: 33.94693789,
+		lng: -84.27780747
+	}, {
+		lat: 33.94711589,
+		lng: -84.27950263
+	}, {
+		lat: 33.94578086,
+		lng: -84.28214192
+	}, {
+		lat: 33.94469502,
+		lng: -84.28190589
+	}, {
+		lat: 33.94385838,
+		lng: -84.28379416
+	}, {
+		lat: 33.94291492,
+		lng: -84.28351521
+	}, {
+		lat: 33.94191805,
+		lng: -84.2847383
+	}, {
+		lat: 33.94156202,
+		lng: -84.28448081
+	}, {
+		lat: 33.94245209,
+		lng: -84.28209901
+	}, {
+		lat: 33.94159762,
+		lng: -84.28149819
+	}, {
+		lat: 33.94200705,
+		lng: -84.28021073
+	}, {
+		lat: 33.9401735,
+		lng: -84.27881598
+	}, {
+		lat: 33.9401735,
+		lng: -84.27852631
+	}];
+
+	// Construct the polygon.
+	var neighborhood = new google.maps.Polygon({
+		paths: polyCoords,
+		strokeColor: '#6FB942',
+		strokeOpacity: 0.8,
+		strokeWeight: 2,
+		fillColor: '#C0FFAD',
+		fillOpacity: 0.35
+	});
+	neighborhood.setMap(map);
+	
 }
 
 
@@ -294,7 +435,7 @@ function setActiveLocation(clickedLocation) {
 	// Turn off the bounce after a short while
 	setTimeout(function() {
 		toggleBounce(markers[clickedLocation]);
-	}, 600);
+	}, 1400);
 
 	// Display the location detail info
 	// Construct the detail html from the location info array
@@ -310,5 +451,5 @@ function setActiveLocation(clickedLocation) {
 // Center map and set zoom on given location
 function centerMapOnLocation(locationIndex) {
 	map.panTo( mapLocations[locationIndex].position );
-	map.setZoom(16);
+	//map.setZoom(14);
 }
