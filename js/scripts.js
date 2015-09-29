@@ -107,27 +107,16 @@ $(function() {
 	
 	// Set fullheight items to window height
 	$('.fullheight').css('height', wheight);
-	// Set map height on mobile
-	var mapHeightDefault = $('.map-container').css('height');
-	if ( $(window).width() < mobileSize ) {
-		var mapHeight = $(window).height()*0.7;
-		$('.map-container').css('height', mapHeight+'px' );
-	}
+	
+	
 	// Adjustments based on window resize
 	$(window).resize( function() {
+		
 		// Adjust fullheight elements
 		wheight = $(window).height(); // get the height of the window	
 		$('.fullheight').css('height', wheight); // set fullhieight items to window height
 		
-		//Adjust map height
-		if ( $(window).width() < mobileSize ) {
-			// Set map height to 70% of window height
-			var mapHeight = $(window).height()*0.7;
-			$('.map-container').css('height', mapHeight+'px' );
-		} else { // Set it to the default height
-			$('.map-container').css('height', mapHeightDefault );
-		}
-		
+		// Reset map position
 		closeAllInfoWindows();
 		map.panTo(mapCenter);
 	});

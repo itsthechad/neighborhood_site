@@ -363,7 +363,7 @@ footer a:hover {
 }
 
 #locations-list {
-	height: 50vh;
+	height: 60vh;
     overflow: scroll;
 	border-radius: 15px 0 0 15px;
 	background-color: #fff;
@@ -395,7 +395,7 @@ footer a:hover {
 }
 
 #map {
-	height: 50vh;
+	height: 60vh;
 	border-radius: 0 15px 15px 0;
 }
 
