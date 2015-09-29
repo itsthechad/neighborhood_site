@@ -180,8 +180,16 @@ $(function() {
 	
 	// Setup carousel
 	$('.carousel').carousel({
-	  interval: 4000
+	    interval: 4000,
+		pause: false
 	});
+	
+	//replace IMG inside carousels with a background image
+    $('#featured .item img').each(function() {
+        var imgSrc = $(this).attr('src');
+        $(this).parent().css({'background-image': 'url('+imgSrc+')'});
+        $(this).remove();
+    });
 	
 	// automatically generate carousel indicators
 	for (var i=0; i < slideqty; i++) {
@@ -195,7 +203,7 @@ $(function() {
 	}
 	
 	// Move carousel captions to captions bucket
-	function moveCaptions() {
+/* 	function moveCaptions() {
 		var currentCaption = $('.carousel-inner .item.active .carousel-caption').html();
 		if (currentCaption){
 			$('#caption-bucket').html(currentCaption);
@@ -208,7 +216,7 @@ $(function() {
 	// Now do it automatically whenever the slide changes
 	$('.carousel').on('slid.bs.carousel', function() {
 		moveCaptions();		
-	});
+	}); */
 
 	
 /***** Map and locations ******/
@@ -285,6 +293,8 @@ function initMap() {
     zoom: 14,
     center: mapCenter,
 	disableDefaultUI: true,
+	scrollwheel: false,
+	scaleControl: false,
     mapTypeControlOptions: {
       mapTypeIds: [google.maps.MapTypeId.ROADMAP, customMapTypeId]
     }

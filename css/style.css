@@ -230,13 +230,17 @@ header .inbody .navbar-brand span.subhead {
 	height: 100%;
 }
 
-.carousel-inner {
+/* .carousel-inner {
 	margin-bottom: 30px;
+} */
+
+.carousel-inner>.item>img {
+	width: 100%;
 }
 
-.carousel-indicators {
+/* .carousel-indicators {
 	bottom: -40px;
-}
+} */
 
 .carousel-indicators li {
 	border-color: #000;
@@ -248,9 +252,32 @@ header .inbody .navbar-brand span.subhead {
 	margin-left: 3px;
 }
 
-.carousel-caption {
+/* .carousel-caption {
 	display: none;
+} */
+
+.carousel-caption {
+    width: 100%;
+    left: 0;
+	bottom: 0;
+/* 	background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.77)); */
+	background-color: rgba(255, 255, 255, 0.74);
+    padding: 40px 0 70px 0;
 }
+
+.carousel-caption h3 {
+	margin-bottom: 15px;
+	text-shadow: none;
+}
+
+.carousel-caption p {
+	padding-left: 20%;
+	padding-right: 20%;
+	text-align: left;
+	text-shadow: none;
+	color: #000;
+}
+
 
 
 /** Page **/
@@ -309,6 +336,12 @@ a:hover {
 
 }
 
+/** Page: Gallery **/
+
+#gallery.page {
+	padding: 0;
+}
+
 
 /** Page: Nearby **/
 #nearby {
@@ -352,13 +385,12 @@ a:hover {
 }
 
 #locations-list {
-	height: 250px;
+	height: 200px;
     overflow: scroll;
-    border-bottom: 1px solid #CECECE;
     padding-top: 15px;
     padding-bottom: 0;
-    border-top: 1px solid #cecece;
 	background-color: #F7F7F7;
+	box-shadow: inset 0px 0px 20px #CACACA;
 }
 
 #locations-list ul {
@@ -411,6 +443,7 @@ a:hover {
 
 #residents .jumbotron {
 	background-color: rgba(238, 238, 238, 0.88);
+	border-radius: 15px;
 }
 
 #residents .jumbotron h2 {
@@ -491,8 +524,26 @@ footer p {
 
 @media (max-width: 768px) {
 	
+	#headerimage {
+		height: 0;
+	}
+	
 	.page {
 		padding: 50px 0;
+	}
+	
+	.carousel-caption {
+		background-color: rgba(255, 255, 255, 0.7);
+/* 		height: 100%; */
+/* 		padding: 50% 0 50% 0; */
+	}
+	
+	.carousel-caption p {
+		padding-left: 15px;
+		padding-right: 15px;
+		color: #000;
+		font-size: 17px;
+		text-shadow: none;
 	}
 	
 	#forsale img, #residents img {
