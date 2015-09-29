@@ -293,8 +293,8 @@ function initMap() {
     zoom: 14,
     center: mapCenter,
 	disableDefaultUI: true,
-	scrollwheel: false,
-	scaleControl: false,
+/* 	scrollwheel: false,
+	scaleControl: false, */
     mapTypeControlOptions: {
       mapTypeIds: [google.maps.MapTypeId.ROADMAP, customMapTypeId]
     }
@@ -385,6 +385,7 @@ function locationClicked() {
 	var clickedLocation = this.dataset.markerId;
 	// Change the active location
 	setActiveLocation(clickedLocation);	
+	
 } // locationClicked()
 
 
@@ -394,20 +395,7 @@ function markerClicked() {
 	// What location was clicked?
 	var clickedLocation = this.index;
 
-	closeAllInfoWindows();
-	
-	// If we're on mobile, we'll display location info via info windows rather than the
-	// HTML locations list and details elements
-	if ( $(window).width() < mobileSize ){
-		
-		// Center the map on the clicked location
-		centerMapOnLocation(clickedLocation);
-		// Open the appropriate infowindow
-		infowindows[clickedLocation].open(map, markers[clickedLocation]);
-		
-	} else { // The screen is big enough to show the locations list and details sections
-		setActiveLocation(clickedLocation);		
-	} // if else
+	setActiveLocation(clickedLocation);		
 
 } // markerClicked()
 
@@ -433,12 +421,17 @@ function closeAllInfoWindows() {
 // Change the active location to the passed in location
 function setActiveLocation(clickedLocation) {
 	
-	// Set all locations to not active
+	// Set all locations in locations-list to not active
 	$('#locations-list .location').removeClass('active');
 	// Set just the clicked location to active
 	$(".location[data-marker-id=" + clickedLocation + "]").addClass('active');
 
+	// Close any open info windows
+	closeAllInfoWindows();	
+	// Center the map on the clicked location
 	centerMapOnLocation(clickedLocation);
+	// Open the appropriate infowindow
+	infowindows[clickedLocation].open(map, markers[clickedLocation]);
 	
 	// Set the map marker to bounce
 	toggleBounce(markers[clickedLocation]);
@@ -446,20 +439,12 @@ function setActiveLocation(clickedLocation) {
 	setTimeout(function() {
 		toggleBounce(markers[clickedLocation]);
 	}, 1400);
-
-	// Display the location detail info
-	// Construct the detail html from the location info array
-	var htmlLocationDetail = $('<h3>' + mapLocations[clickedLocation].name + '</h3>' + mapLocations[clickedLocation].description);
-	// Fade out the current html, swap it out, then fade back in
-	$('#locations-detail').fadeOut(400, function() {
-		$('#locations-detail').html(htmlLocationDetail);
-		$('#locations-detail').fadeIn(400);
-	});
+	
 	
 } // setActiveLocation()
 
 // Center map and set zoom on given location
 function centerMapOnLocation(locationIndex) {
 	map.panTo( mapLocations[locationIndex].position );
-	//map.setZoom(14);
+	map.setZoom(15);
 }

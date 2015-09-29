@@ -11,7 +11,7 @@ h1,h2,h3,h4,h5,h6 {
 	font-family: "Antic Slab", serif;
 	font-weight: 400;
 	margin: 0;
-	color: #F7534B;
+	color: #5A946B;
 }
 
 
@@ -37,7 +37,7 @@ header .navbar-default .navbar-nav a:focus {
 }
 
 header .navbar-default .navbar-nav a:hover {
-	color: #A9CAAE;
+	color: #A4E4AE;
 }
 
 header .navbar-default .navbar-nav .active a,
@@ -50,7 +50,7 @@ header .navbar-default .navbar-nav .active a:focus {
 }
 
 header .navbar-default .navbar-nav .active a:hover {
-	color: #4DDC5F;
+	color: #A4E4AE;
 	background: transparent;
 }
 
@@ -115,7 +115,7 @@ video {
     margin: auto;
     min-height:100%;
     min-width:50%;
-	opacity: .9;
+	opacity: 1;
 }
 
 /* Don't show video on mobile */
@@ -135,7 +135,15 @@ video {
 /** Navbar Toggle **/
 
 header .navbar-toggle {
-	background-color: #279182;
+	background-color: #5A946B;
+}
+
+.navbar-default .navbar-toggle {
+    border: none;
+}
+
+.navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover {
+    background-color: #457553;
 }
 
 header .navbar-default .navbar-toggle .icon-bar {
@@ -144,7 +152,7 @@ header .navbar-default .navbar-toggle .icon-bar {
 
 @media screen and (max-width: 767px) {
 	header .navbar-collapse {
-		background-color: rgba(30,90,46, .6);
+		background-color: rgba(90, 148, 107, 0.7);
 	}
 }
 
@@ -302,7 +310,12 @@ a {
 
 a:hover {
 	text-decoration: none;
-	color: #E6463D;
+	color: #457553;
+}
+
+footer a:hover {
+	text-decoration: none;
+	color: #C9FF91;
 }
 
 .btn {
@@ -310,12 +323,12 @@ a:hover {
 }
 
 .btn-primary {
-	background-color: #F7534B;
+	background-color: #5A946B;
 	border-color: transparent;
 }
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary:active:hover {
     color: #fff;
-    background-color: #E6463D;
+    background-color: #457553;
     border-color: transparent;
 }
 
@@ -329,10 +342,9 @@ a:hover {
 
 /** Page: About **/
 #about {
-	background-color: #E1FFBE;
-/* 	background-image: linear-gradient(to bottom, #EEF08A, #819A2D); */
-	border-top: 20px solid #F7534B;
-	padding: 70px 0;
+	background: linear-gradient(rgba(238, 255, 239, 0.85), rgba(146, 249, 173, 0.52)), url(../images/congruent_pentagon.png);
+	border-top: 20px solid #B2F1C4;
+	padding: 50px 0 70px 0;
 
 }
 
@@ -350,79 +362,47 @@ a:hover {
 
 }
 
-.map-container {
-	height: 300px;
-	margin-top: 15px;
+#locations-list {
+	height: 50vh;
+    overflow: scroll;
+	border-radius: 15px 0 0 15px;
+	background-color: #fff;
+	padding-top: 30px;
+	opacity: 0.9;
+}
+
+#locations-list ul {
+	list-style: upper-alpha;
+	font-size: .9em;
+}
+
+.location {
+	cursor: pointer;
+	margin-bottom: 7px;
+	color: #5A946B;
+}
+.location:hover {
+	text-decoration: underline;
+}
+
+.location.active {
+	font-size: 1.2em;
+	color: #FD7064;
+}
+.location.active h4 {
+	font-size: 1em;
+	color: #FD7064;
 }
 
 #map {
-	width: 100%;
-	height: 100%;
-	border-radius: 15px 15px 0 0;
+	height: 50vh;
+	border-radius: 0 15px 15px 0;
 }
 
 #map h4 {
 	margin-bottom: 10px;
 }
 
-#locations-container {
-	border-radius: 0 0 15px 15px;
-    padding: 40px 0;
-    background-color: #FFFFF3;
-}
-
-/* Mobile view for map */
-@media screen and (max-width: 768px) {
-		
-	#map {
-		border-radius: 0;
-	}
-	
-	#locations-container {
-		display: none;
-	}
-	
-}
-
-#locations-list {
-	height: 200px;
-    overflow: scroll;
-    padding-top: 15px;
-    padding-bottom: 0;
-	background-color: #F7F7F7;
-	box-shadow: inset 0px 0px 20px #CACACA;
-}
-
-#locations-list ul {
-	list-style: upper-alpha;
-}
-
-.location {
-	cursor: pointer;
-	margin-bottom: 10px;
-	color: #F7625A;
-}
-.location:hover {
-	color: #E6463D;
-	text-decoration: underline;
-}
-
-.location.active {
-	color: #F7534B;
-	font-weight: 700;
-	font-size: 1.2em;
-}
-.location.active h4 {
-	font-size: 1em;
-}
-
-#locations-detail h3 {
-	color: #F7534B;
-}
-
-#locations-detail p {
-	font-size: .8em;
-}
 
 
 /** Page: For Sale **/
@@ -507,6 +487,10 @@ footer p {
 
 @media (max-width: 992px) {
 	
+	#locations-list ul, #locations-list ul h4 {
+		font-size: .9em;
+	}
+	
 	#forsale img, #residents img {
 		width: 400px;
 		border-radius: 7px;
@@ -544,6 +528,14 @@ footer p {
 		color: #000;
 		font-size: 17px;
 		text-shadow: none;
+	}
+	
+	#map {
+		border-radius: 0;
+	}
+	
+	#locations-list {
+		display: none;
 	}
 	
 	#forsale img, #residents img {
