@@ -95,9 +95,6 @@ header .navbar-brand span.subhead {
 #headerimage {
 	position: relative;
     overflow: hidden;
-    width:100vw;
-    height:45vh;
-    max-height:45vh;
 }
 
 #headline {
@@ -113,6 +110,22 @@ header .navbar-brand span.subhead {
     line-height: .8;
     color: #DAFDE1;
     text-shadow: 1px 1px 3px #5B956C;
+	/* 	animation */
+	opacity:0;
+	-webkit-animation: fadeIn ease-out 1 2s 1.5s forwards;
+	animation: fadeIn ease-out 2s 1.5s forwards;
+}
+
+#headline h2 {
+	font-size: 3vw;
+    text-align: center;
+	line-height: 1.7;
+    color: #DAFDE1;
+    text-shadow: 1px 1px 3px #5B956C;
+	/* 	animation */
+	opacity:0;
+	-webkit-animation: fadeIn ease-out 1 2s 3.5s forwards;
+	animation: fadeIn ease-out 1 2s 3.5s forwards;
 }
 
 .video-container {
@@ -146,6 +159,21 @@ video {
 	}
 }
 
+#scroll-hint {
+    background-color: rgba(255, 255, 255, 0.35);
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+    height: 45px;
+    width: 90px;
+    border-radius: 90px 90px 0 0;
+    padding: 13px;
+    color: rgba(255, 255, 255, 0.54);
+    text-align: center;
+    font-size: 64px;
+    line-height: .1;
+}
 
 
 
@@ -480,12 +508,6 @@ footer p {
 
 
 /** Animation **/
-
-.fade-in {
-	opacity:0;
-	-webkit-animation: fadeIn ease-out 1 2s .5s forwards;
-	animation: fadeIn ease-out 1 2s .5s forwards;
-}
 
 @-webkit-keyframes fadeIn { 
 	0% { 

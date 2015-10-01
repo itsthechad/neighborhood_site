@@ -149,7 +149,7 @@ $(function() {
 /***** Smooth scrolling ******/
 	
 	//Use smooth scrolling when clicking on navigation
-	$('nav a[href*=#]:not([href=#])').click(function() {
+	$('nav a[href*=#]:not([href=#]), #scroll-hint-container a').click(function() {
 		if (location.pathname.replace(/^\//, '') ===
 			this.pathname.replace(/^\//, '') &&
 			location.hostname === this.hostname) {
