@@ -58,6 +58,7 @@ header .navbar-default .navbar-nav .active a:hover {
 /** Navbar Brand **/
 
 header .navbar-brand {
+	display: none;
 	background: url(../images/house-logo.svg);
 	background-repeat: no-repeat;
 	background-position: 38px 0;
@@ -99,11 +100,27 @@ header .navbar-brand span.subhead {
     max-height:45vh;
 }
 
+#headline {
+	position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#headline h1 {
+	font-size: 15vw;
+    text-align: center;
+    line-height: .8;
+    color: #DAFDE1;
+    text-shadow: 1px 1px 3px #5B956C;
+}
+
 .video-container {
 	position:absolute;
     height:100%;
     width:200%;
     left:-50%;
+	z-index: -1;
 }
 
 video {
@@ -174,6 +191,7 @@ header .navbar.inbody .navbar-nav {
 }
 
 header .inbody .navbar-brand {
+	display: block;
 	background-size: 43px;
 	background-position: top left;
 	margin-top: 5px;
@@ -461,6 +479,43 @@ footer p {
 }
 
 
+/** Animation **/
+
+.fade-in {
+	opacity:0;
+	-webkit-animation: fadeIn ease-out 1 2s .5s forwards;
+	animation: fadeIn ease-out 1 2s .5s forwards;
+}
+
+@-webkit-keyframes fadeIn { 
+	0% { 
+		opacity: 0; 
+		-webkit-transform: translateY(100px); 
+	}
+	30% {
+		opacity: 0;
+	}
+	100% { 
+		opacity: 1;
+		-webkit-transform: translateY(0px); 
+	}
+}
+@keyframes fadeIn { 
+	0% { 
+		opacity: 0; 
+		transform: translateY(100px); 
+	}
+	30% {
+		opacity: 0;
+	}
+	100% { 
+		opacity: 1;
+		transform: translateY(0px); 
+	}
+}
+
+
+
 
 /** Media Queries **/
 
@@ -507,10 +562,6 @@ footer p {
 }
 
 @media (max-width: 768px) {
-	
-	#headerimage {
-		height: 0;
-	}
 	
 	.page {
 		padding: 50px 0;
